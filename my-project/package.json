@@ -1,0 +1,10 @@
+{
+	"name": "sally-project",
+	"version": "0.0.1",
+	"dependencies": {
+		"color": "0.5.0",
+		"colors": "^1.4.0",
+		"express": "^4.17.1",
+		"nrm": "^1.2.1"
+	}
+}
