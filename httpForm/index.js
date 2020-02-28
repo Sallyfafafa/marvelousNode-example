@@ -7,7 +7,7 @@ require('http').createServer(function (req, res) {
         '<form method="POST" action="/url">'
       ,   '<h1>My form</h1>'
       ,   '<fieldset>'
-      ,   '<label>Personal information</label>'
+    //   ,   '<label>Personal information</label>'
       ,   '<p>What is your name?</p>'
       ,   '<input type="text" name="name">'
       ,   '<p><button>Submit</button></p>'
