@@ -1,0 +1,14 @@
+{
+    "tobi": {
+        "password": "ferret"
+      , "name": "Tobi Holowaychuk"
+    }, 
+    "manny": {
+        "password": "cat"
+      , "name": "Manny Thecat"
+    },
+    "sally": {
+        "password": "123",
+        "name": "shi lingyan"
+    }
+}
