@@ -1,11 +1,10 @@
-
 var qs = require('querystring')
   , http = require('http')
 
 module.exports = function search (query, fn) {
   http.request({
-      host: 'search.twitter.com'
-    , path: '/search.json?' + qs.stringify({ q: query })
+      host: 'www.sogou.com'
+    , path: '/web.json?' + qs.stringify({ query })
   }, function (res) {
     res.setEncoding('utf8');
 

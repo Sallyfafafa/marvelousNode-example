@@ -15,9 +15,9 @@ app.get('/', function (req, res) {
 });
 
 app.get('/search', function (req, res, next) {
-  search(req.query.q, function (err, tweets) {
+  search(req.query.query, function (err, tweets) {
     if (err) return next(err);
-    res.render('search', { results: tweets, search: req.query.q });
+    res.render('search', { results: tweets, search: req.query.query });
   });
 });
 
