@@ -12,6 +12,8 @@ io.on('connection', function(socket){
 
     socket.on('chat another', function(msg){ // 收到客户端的消息
         io.emit('broadcast', msg);
+        // 另外一种广播方式
+        // io.broadcast.emit('sendMsg', msg);
     });
 
     // socket.on('disconnect', function(){ // 关闭连接触发
