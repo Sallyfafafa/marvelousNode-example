@@ -8,52 +8,59 @@
 
     <script>
         var io = io();
-        io.on('chat another', function(msg){ // 收到服务端的消息
+        var ioId = io.id;
+        var writing = false;
+        io.on('chat another', function(msg) { // 收到服务端的消息
             console.log('another msg:', msg);
             
         });
-        io.on('broadcast', function(msg){
-            console.log('广播消息：', msg);
-        });
-        io.on('hasConnect', function(msg){
-            console.log('广播消息：', msg);
-            console.log('id:', io.id);
-            document.getElementById('myId').innerHTML = io.id;
-        });
-        function submitMes(){  // 事件触发函数
-            console.log('submit message');
-            io.emit('chat message', 'this is a message');
-            return;
-        }
-        function submitElse(){  // 事件触发函数
-            console.log('submit message to another');
-            io.emit('chat another', 'this is a message to everybody'); //传给服务端
-            return;
-        }
-        function receiveMsg (msg, id) {
-            console.log('....')
-            if(id === io.id){
+        io.on('broadcast', function(msg) {
+            console.log(msg)
+            if(msg.id === io.id){
                 document.getElementById('receive').innerHTML = '刚刚发消息的人是我';
             } else {
-                document.getElementById('receive').innerHTML = msg;
+                document.getElementById('receive').innerHTML = msg.id + '说：' + msg.message;
             }
-        }
-        function sendMsg(){
+        });
+        io.on('hasConnect', function(msg) {
+            document.getElementById('myId').innerHTML = io.id;
+        });
+
+        // function submitMes() {  // 事件触发函数
+        //     console.log('submit message');
+        //     io.emit('chat message', 'this is a message');
+        //     return;
+        // }
+
+        // function submitElse() {  // 事件触发函数
+        //     console.log('submit message to another');
+        //     io.emit('chat another', 'this is a message to everybody'); //传给服务端
+        //     return;
+        // }
+
+        function sendMsg() {
             var message = document.getElementById('imText').value;
-            io.emit('sendMsg', message, io.id);
+            var id = io.id;
+            io.emit('chat another', {message, id}); //传给服务端
             document.getElementById('sendText').innerHTML = message;
+        }
+
+        function handleOnKeyDown() {
+            var value = document.getElementById('imText').value;
+            var id = io.id;
+            io.emit('')
         }
     </script>
 </head>
 <body>
-    <button onclick="submitMes()">发给服务器</button>
-    <button onclick="submitElse()">发给除自己以外其他人</button>
+    <!-- <button onclick="submitMes()">发给服务器</button>
+    <button onclick="submitElse()">发给除自己以外其他人</button> -->
     <p>我的id是：<text id="myId"></text></p>
-    <input type="text" id="imText" placeholder="消息内容" name="msg"/>
+    <input type="text" id="imText" placeholder="消息内容" onkeydown="handleOnKeyDown()" name="msg"/>
     <button onclick="sendMsg()">发送消息</button>
     
     <p>发送消息内容：<text id="sendText"></text></p>
     <p>接收消息内容：<text id="receive"></text></p>
-    
+    <p>用户正在输入: <text id="writeId">false</text></p>
 </body>
 </html>
